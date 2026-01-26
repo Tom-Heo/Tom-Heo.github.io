@@ -1,4 +1,4 @@
-/* --- CSS Variables & Reset --- */
+/* Base */
 :root {
   color-scheme: light;
   --color-bake-red: #d41201;
@@ -31,6 +31,7 @@ body {
   font-family: var(--font-sans);
   line-height: 1.6;
   overflow-x: hidden;
+  scroll-behavior: smooth;
 }
 
 a {
@@ -46,6 +47,10 @@ a:focus-visible,
 button:focus-visible {
   outline: 2px solid var(--color-bake-red);
   outline-offset: 3px;
+}
+
+main section {
+  scroll-margin-top: 96px;
 }
 
 .container {
@@ -78,7 +83,7 @@ button:focus-visible {
   left: 16px;
 }
 
-/* --- Header --- */
+/* Header */
 .site-header {
   position: fixed;
   width: 100%;
@@ -145,7 +150,7 @@ button:focus-visible {
   }
 }
 
-/* --- Hero Section --- */
+/* Hero */
 .hero {
   min-height: 100vh;
   display: flex;
@@ -212,6 +217,7 @@ h1 {
   font-size: 0.9rem;
   letter-spacing: 0.18em;
   border: none;
+  border-radius: 999px;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
@@ -220,7 +226,7 @@ h1 {
   box-shadow: 0 12px 24px -16px rgba(212, 18, 1, 0.6);
 }
 
-/* --- Signature Solution Section --- */
+/* Signature Solution */
 .section-solution {
   padding: 120px 0;
   border-top: 1px solid var(--color-line);
@@ -359,7 +365,7 @@ h1 {
   letter-spacing: 0.08em;
 }
 
-/* --- Tech Details Section --- */
+/* Tech Details */
 .section-tech {
   padding: 120px 0;
   background: var(--color-bg);
@@ -403,10 +409,11 @@ h1 {
   color: var(--color-muted);
 }
 
-/* --- Intro Section (Mission) --- */
+/* Mission */
 .section-intro {
   padding: 120px 0;
-  background-color: var(--color-bg-soft);
+  background-color: var(--color-bg);
+  border-top: 1px solid var(--color-line);
 }
 
 .intro-grid {
@@ -459,9 +466,10 @@ h1 {
   letter-spacing: 0.08em;
 }
 
-/* --- Core Values Section --- */
+/* Core Values */
 .section-values {
   padding: 120px 0;
+  border-top: 1px solid var(--color-line);
 }
 
 .section-title {
@@ -516,7 +524,7 @@ h1 {
   color: var(--color-muted);
 }
 
-/* --- Footer --- */
+/* Footer */
 .site-footer {
   border-top: 1px solid var(--color-line);
   padding: 80px 0 40px;
@@ -548,8 +556,8 @@ h1 {
   background-color: var(--color-bake-red);
 }
 
-/* 반응형 처리 */
-@media (max-width: 900px) {
+/* Responsive */
+@media (max-width: 980px) {
   .header-inner {
     flex-wrap: wrap;
     height: auto;
@@ -567,7 +575,9 @@ h1 {
     padding-top: 160px;
   }
 
-  .solution-grid {
+  .solution-grid,
+  .tech-grid,
+  .intro-grid {
     grid-template-columns: 1fr;
   }
 
@@ -575,24 +585,13 @@ h1 {
     height: 300px;
   }
 
-  .tech-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .intro-grid {
-    grid-template-columns: 1fr;
-  }
-
   .intro-visual {
     height: 280px;
   }
 }
 
-@media (max-width: 640px) {
-  .nav {
-    display: none;
-  }
-
+@media (max-width: 680px) {
+  .nav,
   .status-indicator {
     display: none;
   }
