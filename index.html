@@ -3,53 +3,101 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Bake</title>
+    <title>Bake | 정확하기에 아름답다.</title>
     <meta name="description" content="Bake | 정확하기에 아름답다." />
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
     <a class="skip-link" href="#main">본문으로 건너뛰기</a>
+
     <header class="site-header">
       <div class="container header-inner">
-        <a class="logo" href="#">Bake</a>
-        <nav class="nav">
-          <a href="#about">핵심 가치</a>
+        <div class="logo">Bake.</div>
+        <nav class="nav mono-text">
+          <a href="#mission">MISSION</a>
+          <a href="#values">VALUES</a>
+          <a href="#contact">CONTACT</a>
         </nav>
+        <div class="status-indicator mono-text" aria-label="녹화 상태">
+          <span class="rec-dot" aria-hidden="true"></span>
+          REC
+        </div>
       </div>
     </header>
 
     <main id="main">
       <section class="hero" aria-labelledby="hero-title">
-        <div class="container hero-grid">
-          <div class="hero-text">
-            <h1 id="hero-title">Bake</h1>
-            <p class="subtitle">정확하기에 아름답다.</p>
-            <div class="cta-group">
-              <a class="btn" href="#about">소개 보기</a>
+        <div class="hero-bg" aria-hidden="true"></div>
+        <div class="container hero-content">
+          <p class="hero-label mono-text">BAKE STUDIO</p>
+          <h1 id="hero-title">
+            <span class="bake-red-text">정확하기에</span><br />
+            아름답다.
+          </h1>
+          <p class="hero-mission mono-text">
+            불필요한 요소를 덜어내고, 핵심만 남깁니다.
+          </p>
+          <a class="btn-cta mono-text" href="#mission">미션 보기</a>
+        </div>
+      </section>
+
+      <section id="mission" class="section-intro">
+        <div class="container intro-grid">
+          <div class="intro-text">
+            <h2>진실함의 기술.</h2>
+            <p>정확함을 기준으로 진실함을 담고, 비범한 결과를 지향합니다.</p>
+            <p>
+              Bake는 명확한 구조와 절제된 표현으로 브랜드의 본질을 선명하게
+              드러냅니다.
+            </p>
+          </div>
+          <div class="intro-visual" role="presentation" aria-hidden="true">
+            <div class="visual-overlay-data mono-text">
+              &gt; SIGNAL: STABLE<br />
+              &gt; COLOR: BAKE_RED
             </div>
           </div>
         </div>
       </section>
 
-      <section id="about" class="about" aria-labelledby="about-title">
-        <div class="container about-grid">
-          <div class="about-text">
-            <h2 id="about-title">Bake 핵심 가치</h2>
-            <p>정확함을 기준으로 진실함을 담고, 비범한 결과를 지향합니다.</p>
-            <ul class="value-list">
-              <li>정확함</li>
-              <li>진실함</li>
-              <li>비범함</li>
-            </ul>
+      <section id="values" class="section-values" aria-labelledby="values-title">
+        <div class="container">
+          <h2 id="values-title" class="section-title">Bake 핵심 가치</h2>
+          <div class="values-grid">
+            <article class="value-item">
+              <span class="value-header mono-text">01 / ACCURACY</span>
+              <div class="value-visual val-1" aria-hidden="true"></div>
+              <h3>정확함</h3>
+              <p>
+                오차 없는 기준과 반복 가능한 디테일로 일관된 경험을 만듭니다.
+              </p>
+            </article>
+            <article class="value-item">
+              <span class="value-header mono-text">02 / SINCERITY</span>
+              <div class="value-visual val-2" aria-hidden="true"></div>
+              <h3>진실함</h3>
+              <p>꾸밈없는 메시지가 전달되도록 본질만 남기는 편집을 합니다.</p>
+            </article>
+            <article class="value-item">
+              <span class="value-header mono-text">03 / EXTRAORDINARY</span>
+              <div class="value-visual val-3" aria-hidden="true"></div>
+              <h3>비범함</h3>
+              <p>작은 차이를 크게 만드는 설계로 브랜드의 인상을 강화합니다.</p>
+            </article>
           </div>
         </div>
       </section>
     </main>
 
-    <footer class="site-footer">
+    <footer id="contact" class="site-footer">
       <div class="container">
-        <p>© 2026 Bake. All rights reserved.</p>
+        <p class="footer-slogan mono-text">정확하기에 아름답다.</p>
+        <div class="footer-info mono-text">
+          <p>Bake | contact@bake.film</p>
+          <p>© 2026 Bake. All rights reserved.</p>
+        </div>
       </div>
+      <div class="footer-line" aria-hidden="true"></div>
     </footer>
   </body>
 </html>
