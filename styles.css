@@ -7,6 +7,7 @@
   --color-text: #111111;
   --color-muted: #6b6b6b;
   --color-line: #e6e6e6;
+  --image-proof: url("https://source.unsplash.com/wXuzS9xR49M/1600x900");
   --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
     Arial, "Noto Sans KR", sans-serif;
   --font-mono: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
@@ -301,8 +302,9 @@ h1 {
       rgba(0, 0, 0, 0.08) 1px,
       transparent 1px,
       transparent 8px
-    );
-  filter: contrast(1.15) brightness(0.96);
+    ),
+    var(--image-proof);
+  filter: grayscale(1) contrast(1.15) brightness(0.9);
 }
 
 .comp-image-after {
@@ -311,7 +313,8 @@ h1 {
       rgba(212, 18, 1, 0.18),
       transparent 60%
     ),
-    linear-gradient(135deg, #ffffff 0%, #f2f2f2 100%);
+    var(--image-proof);
+  filter: saturate(1.15) contrast(1.05);
   opacity: 0;
   transition: opacity 0.3s ease;
 }
