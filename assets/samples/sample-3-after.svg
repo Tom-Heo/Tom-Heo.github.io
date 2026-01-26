@@ -1,0 +1,12 @@
+<svg width="1280" height="720" viewBox="0 0 1280 720" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1280" height="720" fill="#111111" />
+  <rect x="100" y="160" width="1080" height="360" fill="#2a2f37" />
+  <rect x="160" y="220" width="320" height="240" fill="#9c6a3b" />
+  <rect x="520" y="220" width="320" height="240" fill="#4a6f9c" />
+  <rect x="880" y="220" width="240" height="240" fill="#bca35d" />
+  <rect x="100" y="560" width="1080" height="40" fill="#343434" />
+  <rect x="120" y="570" width="200" height="20" fill="#c2c2c2" />
+  <text x="80" y="90" fill="#f0f0f0" font-size="36" font-family="Arial, sans-serif">
+    Sample 03 - After
+  </text>
+</svg>

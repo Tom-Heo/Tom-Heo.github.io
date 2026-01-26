@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title data-i18n="title_tech">Bake | 기술</title>
+    <meta
+      name="description"
+      content="Bake 기술 설명"
+      data-i18n-attr="content:meta_tech_desc"
+    />
+    <link rel="stylesheet" href="css/site.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="logo" href="index.html" data-i18n="site_name">Bake</a>
+        <nav class="site-nav" aria-label="Primary">
+          <a href="index.html" data-i18n="nav_home">홈</a>
+          <a href="product.html" data-i18n="nav_product">제품</a>
+          <a href="tech.html" data-i18n="nav_tech">기술</a>
+          <a href="samples.html" data-i18n="nav_samples">샘플</a>
+          <a href="pricing.html" data-i18n="nav_pricing">가격</a>
+          <a href="faq.html" data-i18n="nav_faq">FAQ</a>
+          <a href="contact.html" data-i18n="nav_contact">문의</a>
+          <a href="about.html" data-i18n="nav_about">회사 소개</a>
+        </nav>
+        <div class="header-actions">
+          <a class="btn-primary" href="contact.html" data-i18n="cta_contact"
+            >문의하기</a
+          >
+          <div class="lang-toggle" role="group" aria-label="Language">
+            <button type="button" class="lang-button" data-lang="ko">KR</button>
+            <button type="button" class="lang-button" data-lang="en">EN</button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="main">
+      <section class="page-hero">
+        <div class="container">
+          <p class="eyebrow" data-i18n="tech_eyebrow">기술</p>
+          <h1 data-i18n="tech_heading">기술</h1>
+          <p class="lead" data-i18n="tech_intro">
+            핵심 기술을 있는 그대로 설명합니다. 용어는 유지하되 이해를
+            돕습니다.
+          </p>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container">
+          <div class="grid two">
+            <div class="card">
+              <h2 data-i18n="tech_oklab_title">Oklab</h2>
+              <p data-i18n="tech_oklab_desc">
+                색의 지각적 성질을 직접 다루기 위해 Oklab 색공간에서
+                처리합니다.
+              </p>
+            </div>
+            <div class="card">
+              <h2 data-i18n="tech_cnn_title">CNN 기반 복원</h2>
+              <p data-i18n="tech_cnn_desc">
+                ViT가 아닌 CNN을 사용해 국소 디테일 복원에 집중합니다.
+              </p>
+            </div>
+            <div class="card">
+              <h2 data-i18n="tech_diffusion_title">Diffusion + Residual</h2>
+              <p data-i18n="tech_diffusion_desc">
+                Diffusion과 Residual 구조로 안정적인 복원을 확보했습니다.
+              </p>
+            </div>
+            <div class="card">
+              <h2 data-i18n="tech_chroma_title">Chroma Subsampling</h2>
+              <p data-i18n="tech_chroma_desc">
+                4:2:2 소스의 크로마 정보를 복원하여 4:4:4 품질을
+                지향합니다.
+              </p>
+            </div>
+          </div>
+          <p class="note" data-i18n="tech_note">
+            기술적 용어는 그대로 사용하지만, 문의 시 상세 설명을 제공합니다.
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <div class="footer-brand">
+          <h2 data-i18n="footer_brand_title">Bake</h2>
+          <p data-i18n="footer_mission">
+            독립영화 제작자들을 기술적으로 지원합니다.
+          </p>
+        </div>
+        <div class="footer-links">
+          <div>
+            <h3 data-i18n="footer_slogan_label">슬로건</h3>
+            <p data-i18n="footer_slogan_text">정확하기에 아름답다.</p>
+          </div>
+          <div>
+            <h3 data-i18n="footer_contact_label">문의</h3>
+            <a href="mailto:contact@bake.ai">contact@bake.ai</a>
+          </div>
+        </div>
+      </div>
+      <p class="footer-meta" data-i18n="footer_rights">
+        © Bake. All rights reserved.
+      </p>
+    </footer>
+
+    <script src="js/i18n.js"></script>
+    <script src="js/site.js"></script>
+  </body>
+</html>

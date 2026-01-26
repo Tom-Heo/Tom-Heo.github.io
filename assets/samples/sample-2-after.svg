@@ -1,0 +1,11 @@
+<svg width="1280" height="720" viewBox="0 0 1280 720" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1280" height="720" fill="#101010" />
+  <rect x="140" y="120" width="1000" height="480" fill="#2a2f3a" />
+  <circle cx="420" cy="360" r="140" fill="#b76a4a" />
+  <circle cx="840" cy="360" r="120" fill="#4f7ab0" />
+  <line x1="240" y1="520" x2="1040" y2="520" stroke="#d1b36a" stroke-width="4" />
+  <line x1="240" y1="560" x2="1040" y2="560" stroke="#7f8fa6" stroke-width="4" />
+  <text x="80" y="90" fill="#f0f0f0" font-size="36" font-family="Arial, sans-serif">
+    Sample 02 - After
+  </text>
+</svg>
