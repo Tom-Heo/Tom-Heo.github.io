@@ -50,12 +50,18 @@
             <div class="tech-feature">
               <div class="tech-visual-area">
                 <div class="visual-oklab-container">
-                  <div class="color-space-axis">
-                    <div class="axis-plane"></div>
-                    <div class="axis-plane"></div>
-                    <div class="axis-plane"></div>
+                  <div class="color-cube-wrapper">
+                    <div class="color-cube">
+                      <div class="cube-face front"></div>
+                      <div class="cube-face back"></div>
+                      <div class="cube-face right"></div>
+                      <div class="cube-face left"></div>
+                      <div class="cube-face top"></div>
+                      <div class="cube-face bottom"></div>
+                      <!-- 내부 색상 볼륨 (Fog) -->
+                      <div class="color-volume"></div>
+                    </div>
                   </div>
-                  <div class="space-core"></div>
                 </div>
               </div>
               <div class="tech-text-area">
@@ -72,10 +78,8 @@
             <div class="tech-feature reverse">
               <div class="tech-visual-area">
                 <div class="visual-cnn-container">
-                  <div class="cnn-grid"></div>
-                  <div class="cnn-kernel">
-                    <div class="scan-beam"></div>
-                  </div>
+                  <div class="rgb-stripe-grid"></div>
+                  <div class="cnn-scan-line"></div>
                 </div>
               </div>
               <div class="tech-text-area">
