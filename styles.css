@@ -194,31 +194,47 @@ a {
   top: 50%; left: 50%;
   transform: translate(-50%, -50%);
   border-radius: 50%;
-  border: 2px solid var(--ring-color, rgba(255, 255, 255, 0.2));
+  /* Tri-layer trick for fake volume */
+  border: 4px double var(--ring-color, rgba(255, 255, 255, 0.2)); 
   box-shadow:
-    0 0 12px var(--ring-color, rgba(255, 255, 255, 0.2)),
-    inset 0 0 10px rgba(255, 255, 255, 0.15);
-  filter: drop-shadow(0 0 8px var(--ring-color, rgba(255, 255, 255, 0.2)));
+    0 0 15px var(--ring-color, rgba(255, 255, 255, 0.2)),
+    inset 0 0 15px var(--ring-color, rgba(255, 255, 255, 0.2));
+  filter: drop-shadow(0 0 5px var(--ring-color, rgba(255, 255, 255, 0.5)));
   transform-style: preserve-3d;
 }
 
+/* Pseudo-elements for 3D thickness illusion */
+.gyro-ring::before,
+.gyro-ring::after {
+  content: "";
+  position: absolute;
+  inset: -4px; /* Match border width */
+  border-radius: 50%;
+  border: 2px solid var(--ring-color);
+  opacity: 0.5;
+  pointer-events: none;
+}
+.gyro-ring::before { transform: translateZ(2px); }
+.gyro-ring::after { transform: translateZ(-2px); }
+
 .ring-x {
   width: 100%; height: 100%;
-  --ring-color: rgba(255, 90, 90, 0.6);
+  --ring-color: rgba(255, 60, 60, 0.5);
   animation: spin-x 12s linear infinite;
 }
 
 .ring-y {
   width: 80%; height: 80%;
-  --ring-color: rgba(90, 255, 150, 0.55);
+  --ring-color: rgba(60, 255, 120, 0.45);
   animation: spin-y 15s linear infinite reverse;
 }
 
 .ring-z {
   width: 60%; height: 60%;
-  --ring-color: rgba(90, 160, 255, 0.5);
+  --ring-color: rgba(60, 140, 255, 0.4);
   animation: spin-z 10s linear infinite;
 }
+
 
 @keyframes spin-x { from { transform: translate(-50%, -50%) rotateX(0deg); } to { transform: translate(-50%, -50%) rotateX(360deg); } }
 @keyframes spin-y { from { transform: translate(-50%, -50%) rotateY(0deg); } to { transform: translate(-50%, -50%) rotateY(360deg); } }
@@ -265,40 +281,51 @@ a {
   background: #000;
 }
 
-/* Layer 1: The RGB Grid (Sub-pixels) */
+/* Layer 1: The RGB Grid (Sub-pixels) - Diamond/Pentile Style */
 .oled-grid-layer {
   position: absolute;
   inset: 0;
   background-color: #000;
+  /* 
+     Using larger spacing and distinct "capsule" shapes for R, G, B 
+     to simulate real macro shot of an OLED panel.
+  */
   background-image:
-    radial-gradient(ellipse 3px 6px at 6px 6px, rgba(255, 70, 70, 0.5) 0, rgba(255, 70, 70, 0.5) 2px, transparent 3px),
-    radial-gradient(ellipse 3px 6px at 16px 6px, rgba(80, 255, 140, 0.5) 0, rgba(80, 255, 140, 0.5) 2px, transparent 3px),
-    radial-gradient(ellipse 3px 6px at 26px 6px, rgba(80, 140, 255, 0.5) 0, rgba(80, 140, 255, 0.5) 2px, transparent 3px),
-    radial-gradient(ellipse 3px 6px at 6px 16px, rgba(255, 70, 70, 0.25) 0, rgba(255, 70, 70, 0.25) 2px, transparent 3px),
-    radial-gradient(ellipse 3px 6px at 16px 16px, rgba(80, 255, 140, 0.25) 0, rgba(80, 255, 140, 0.25) 2px, transparent 3px),
-    radial-gradient(ellipse 3px 6px at 26px 16px, rgba(80, 140, 255, 0.25) 0, rgba(80, 140, 255, 0.25) 2px, transparent 3px);
-  background-size: 32px 22px;
-  opacity: 0.35;
-  filter: saturate(1.2);
+    /* Red Capsules */
+    radial-gradient(ellipse 4px 8px at 10px 10px, rgba(255, 50, 50, 0.6) 0, rgba(255, 50, 50, 0.4) 3px, transparent 4px),
+    /* Blue Capsules */
+    radial-gradient(ellipse 4px 8px at 26px 26px, rgba(50, 100, 255, 0.6) 0, rgba(50, 100, 255, 0.4) 3px, transparent 4px),
+    /* Green Capsules (Smaller & More frequent in Pentile) */
+    radial-gradient(circle at 26px 10px, rgba(50, 255, 100, 0.6) 0, rgba(50, 255, 100, 0.4) 2px, transparent 3px),
+    radial-gradient(circle at 10px 26px, rgba(50, 255, 100, 0.6) 0, rgba(50, 255, 100, 0.4) 2px, transparent 3px);
+  
+  background-size: 32px 32px; /* Large pattern for Macro feel */
+  opacity: 0.4;
+  filter: saturate(1.5) contrast(1.2);
 }
 
-/* Layer 2: The Mask (Focus Area) */
+/* Layer 2: The Mask (Focus Area) - Lit Pixels */
 .oled-mask-layer {
   position: absolute;
   inset: 0;
   background-image:
-    radial-gradient(ellipse 3px 6px at 6px 6px, rgba(255, 70, 70, 0.9) 0, rgba(255, 70, 70, 0.9) 2px, transparent 3px),
-    radial-gradient(ellipse 3px 6px at 16px 6px, rgba(80, 255, 140, 0.9) 0, rgba(80, 255, 140, 0.9) 2px, transparent 3px),
-    radial-gradient(ellipse 3px 6px at 26px 6px, rgba(80, 140, 255, 0.9) 0, rgba(80, 140, 255, 0.9) 2px, transparent 3px),
-    radial-gradient(ellipse 3px 6px at 6px 16px, rgba(255, 70, 70, 0.7) 0, rgba(255, 70, 70, 0.7) 2px, transparent 3px),
-    radial-gradient(ellipse 3px 6px at 16px 16px, rgba(80, 255, 140, 0.7) 0, rgba(80, 255, 140, 0.7) 2px, transparent 3px),
-    radial-gradient(ellipse 3px 6px at 26px 16px, rgba(80, 140, 255, 0.7) 0, rgba(80, 140, 255, 0.7) 2px, transparent 3px);
-  background-size: 32px 22px;
-  mask-image: radial-gradient(circle at center, rgba(255, 255, 255, 1) 0, rgba(255, 255, 255, 0) 70%);
-  -webkit-mask-image: radial-gradient(circle at center, rgba(255, 255, 255, 1) 0, rgba(255, 255, 255, 0) 70%);
-  filter: brightness(2.8) saturate(1.4);
+    /* Lit Red */
+    radial-gradient(ellipse 4px 8px at 10px 10px, rgba(255, 100, 100, 1) 0, rgba(255, 0, 0, 0.8) 3px, transparent 5px),
+    /* Lit Blue */
+    radial-gradient(ellipse 4px 8px at 26px 26px, rgba(100, 150, 255, 1) 0, rgba(0, 50, 255, 0.8) 3px, transparent 5px),
+    /* Lit Green */
+    radial-gradient(circle at 26px 10px, rgba(100, 255, 150, 1) 0, rgba(0, 255, 0, 0.8) 2px, transparent 4px),
+    radial-gradient(circle at 10px 26px, rgba(100, 255, 150, 1) 0, rgba(0, 255, 0, 0.8) 2px, transparent 4px);
+    
+  background-size: 32px 32px;
+  
+  /* Focus vignette */
+  mask-image: radial-gradient(circle at center, rgba(255, 255, 255, 1) 10%, rgba(255, 255, 255, 0) 60%);
+  -webkit-mask-image: radial-gradient(circle at center, rgba(255, 255, 255, 1) 10%, rgba(255, 255, 255, 0) 60%);
+  
   mix-blend-mode: screen;
-  opacity: 0.95;
+  filter: brightness(2.0) drop-shadow(0 0 2px rgba(255,255,255,0.5));
+  opacity: 1;
 }
 
 /* Layer 3: Bloom & Glow */
@@ -366,12 +393,18 @@ a {
   top: 50%;
   left: 50%;
   transform-style: preserve-3d;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  box-shadow: inset 0 0 18px rgba(255, 255, 255, 0.06);
+  /* 
+     Correct Glass Material:
+     - Visible backface for transparency depth
+     - Very subtle fill
+     - Strong borders for edge highlights
+  */
+  backface-visibility: visible !important;
+  background: rgba(200, 220, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(2px);
   -webkit-backdrop-filter: blur(2px);
-  backface-visibility: hidden;
 }
 
 .face.front  { width: var(--block-size); height: var(--block-size); transform: translate(-50%, -50%) translateZ(calc(var(--block-depth) * 0.5)); }
