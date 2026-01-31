@@ -162,81 +162,147 @@ a {
 
 /* 기술 시각화 (Tech Visuals) */
 .tech-visual {
-  height: 140px;
+  height: 160px;
   width: 100%;
   margin-bottom: 24px;
   border-radius: 12px;
-  background: #0a0a0a;
+  background: #000;
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
   overflow: hidden;
+  box-shadow: inset 0 0 20px rgba(0,0,0,0.8);
 }
 
-/* 1. Oklab: The Spectrum Orb */
+/* 1. Oklab: The Holographic Wireframe Sphere */
+.visual-oklab {
+  perspective: 800px;
+}
+
 .visual-oklab::before {
   content: "";
   width: 80px;
   height: 80px;
   border-radius: 50%;
-  background: conic-gradient(from 180deg, #ff0000, #00ff00, #0000ff, #ff0000);
-  filter: blur(24px);
-  opacity: 0.6;
-  transition: opacity 0.3s ease;
+  /* 와이어프레임 그리드 + 내부 오로라 */
+  background: 
+    radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0) 20%),
+    repeating-linear-gradient(transparent 0, transparent 18px, rgba(255, 255, 255, 0.15) 19px, rgba(255, 255, 255, 0.15) 20px),
+    repeating-linear-gradient(90deg, transparent 0, transparent 18px, rgba(255, 255, 255, 0.15) 19px, rgba(255, 255, 255, 0.15) 20px),
+    conic-gradient(from 0deg, #ff0000, #ffff00, #00ff00, #00ffff, #0000ff, #ff00ff, #ff0000);
+  background-size: 100% 100%, 100% 100%, 100% 100%, 200% 200%;
+  background-blend-mode: screen, normal, normal, overlay;
+  
+  /* 구체 입체감 쉐이딩 */
+  box-shadow: 
+    inset -10px -10px 30px rgba(0, 0, 0, 0.9),
+    inset 4px 4px 10px rgba(255, 255, 255, 0.5),
+    0 0 30px rgba(255, 255, 255, 0.1);
+  
+  transition: all 0.5s ease;
+  animation: sphere-rotate 10s linear infinite;
+}
+
+@keyframes sphere-rotate {
+  0% { transform: rotate(0deg); background-position: 0 0, 0 0, 0 0, 0% 50%; }
+  100% { transform: rotate(360deg); background-position: 0 0, 0 0, 0 0, 100% 50%; }
 }
 
 .tech-card:hover .visual-oklab::before {
-  opacity: 0.9;
+  box-shadow: 
+    inset -10px -10px 30px rgba(0, 0, 0, 0.9),
+    inset 4px 4px 10px rgba(255, 255, 255, 0.8),
+    0 0 50px rgba(212, 18, 1, 0.4); /* 붉은 브랜드 컬러 글로우 */
 }
 
-/* 2. CNN: The Focusing Grid */
+/* 2. CNN: The OLED Matrix (Macro View) */
 .visual-cnn {
-  background-image: radial-gradient(#333 1px, transparent 1px);
-  background-size: 12px 12px;
+  /* RGB 서브픽셀 패턴 (Micro LED) */
+  background-image: 
+    linear-gradient(rgba(0,0,0,0.8) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,0,0,0.8) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,0,0,0.4), rgba(0,255,0,0.4), rgba(0,0,255,0.4));
+  background-size: 3px 3px, 3px 3px, 6px 6px;
   background-position: center;
 }
 
-.visual-cnn::after {
+/* 글래스 표면 반사 및 비네팅 */
+.visual-cnn::before {
   content: "";
   position: absolute;
-  width: 12px;
-  height: 12px;
-  background: var(--accent);
-  border-radius: 50%;
-  box-shadow: 0 0 12px var(--accent);
-  opacity: 0;
-  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  transform: scale(0);
+  inset: 0;
+  background: radial-gradient(circle at 50% 50%, transparent 40%, rgba(0,0,0,0.8) 100%);
+  pointer-events: none;
 }
 
-.tech-card:hover .visual-cnn::after {
-  opacity: 1;
-  transform: scale(1);
+/* OLED 픽셀 발광 (Bloom) */
+.visual-cnn::after {
+  content: "";
+  width: 8px;
+  height: 8px;
+  background: #fff;
+  border-radius: 1px;
+  box-shadow: 
+    0 0 10px 2px rgba(255, 255, 255, 0.9), 
+    0 0 20px 8px var(--accent), 
+    0 0 50px 20px var(--accent);
+  opacity: 0.8;
+  animation: pulse-oled 3s infinite ease-in-out;
 }
 
-/* 3. Residual: The Stable Anchor */
-.visual-residual .line {
-  position: absolute;
-  width: 100px;
-  height: 2px;
-  background: var(--accent);
-  z-index: 2;
+@keyframes pulse-oled {
+  0%, 100% { opacity: 0.6; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.1); box-shadow: 0 0 15px 4px rgba(255, 255, 255, 1), 0 0 30px 12px var(--accent), 0 0 80px 30px var(--accent); }
 }
 
-.visual-residual .plane {
+/* 3. Residual: The Isometric Glass Stack */
+.visual-residual {
+  perspective: 600px;
+}
+
+.visual-residual .stack {
+  position: relative;
   width: 60px;
   height: 60px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  background: rgba(255, 255, 255, 0.03);
-  transform: rotate(45deg);
-  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  transform-style: preserve-3d;
+  transform: rotateX(60deg) rotateZ(-30deg);
+  transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-.tech-card:hover .visual-residual .plane {
-  transform: rotate(225deg);
-  background: rgba(255, 255, 255, 0.08);
-  border-color: rgba(255, 255, 255, 0.2);
+.tech-card:hover .visual-residual .stack {
+  transform: rotateX(55deg) rotateZ(-10deg) scale(1.1);
+}
+
+/* 유리판 공통 */
+.visual-residual .plane {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+  transition: all 0.3s ease;
+}
+
+.visual-residual .bottom { transform: translateZ(-30px); background: rgba(255, 255, 255, 0.02); }
+.visual-residual .middle { transform: translateZ(0px); background: rgba(255, 255, 255, 0.05); }
+.visual-residual .top { 
+  transform: translateZ(30px); 
+  border-color: var(--accent); 
+  background: rgba(212, 18, 1, 0.1);
+  box-shadow: 0 0 15px rgba(212, 18, 1, 0.2);
+}
+
+/* 관통하는 레이저 */
+.visual-residual .laser {
+  position: absolute;
+  left: 50%; top: 50%;
+  width: 2px; height: 100px;
+  background: linear-gradient(to bottom, transparent, var(--accent), #fff, var(--accent), transparent);
+  transform: translate(-50%, -50%) rotateX(90deg); /* 눕혀진 공간에서 수직으로 세움 */
+  box-shadow: 0 0 8px var(--accent);
+  opacity: 0.8;
 }
 
 
