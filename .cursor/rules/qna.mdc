@@ -1,8 +1,6 @@
 ---
-name: qna
-description: Bake의 랜딩페이지 관련 질문과 답변 문서
+alwaysApply: true
 ---
-
 # Intro
 Q&A의 내용은 맥락 이해를 위해 존재하며, 랜딩페이지에 그대로 붙여넣는 것은 지양한다.
 
