@@ -173,103 +173,72 @@ a {
 }
 
 /* =========================================
-   1. Oklab: The Gyroscopic Color Core
+   1. Oklab: 3D Spectral Space
    ========================================= */
 .visual-oklab-container {
   position: relative;
   width: 300px;
   height: 300px;
-  transform-style: preserve-3d;
-  animation: float-gyro 6s ease-in-out infinite;
+  perspective: 1000px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-@keyframes float-gyro {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-20px); }
-}
-
-/* Gyro Rings */
-.gyro-ring {
+.color-space-axis {
   position: absolute;
-  top: 50%; left: 50%;
-  transform: translate(-50%, -50%);
+  width: 220px;
+  height: 220px;
   border-radius: 50%;
-  /* Tri-layer trick for fake volume */
-  border: 4px double var(--ring-color, rgba(255, 255, 255, 0.2)); 
-  box-shadow:
-    0 0 15px var(--ring-color, rgba(255, 255, 255, 0.2)),
-    inset 0 0 15px var(--ring-color, rgba(255, 255, 255, 0.2));
-  filter: drop-shadow(0 0 5px var(--ring-color, rgba(255, 255, 255, 0.5)));
   transform-style: preserve-3d;
+  animation: rotate-space 15s linear infinite;
 }
 
-/* Pseudo-elements for 3D thickness illusion */
-.gyro-ring::before,
-.gyro-ring::after {
-  content: "";
-  position: absolute;
-  inset: -4px; /* Match border width */
-  border-radius: 50%;
-  border: 2px solid var(--ring-color);
-  opacity: 0.5;
-  pointer-events: none;
-}
-.gyro-ring::before { transform: translateZ(2px); }
-.gyro-ring::after { transform: translateZ(-2px); }
-
-.ring-x {
-  width: 100%; height: 100%;
-  --ring-color: rgba(255, 60, 60, 0.5);
-  animation: spin-x 12s linear infinite;
-}
-
-.ring-y {
-  width: 80%; height: 80%;
-  --ring-color: rgba(60, 255, 120, 0.45);
-  animation: spin-y 15s linear infinite reverse;
-}
-
-.ring-z {
-  width: 60%; height: 60%;
-  --ring-color: rgba(60, 140, 255, 0.4);
-  animation: spin-z 10s linear infinite;
-}
-
-
-@keyframes spin-x { from { transform: translate(-50%, -50%) rotateX(0deg); } to { transform: translate(-50%, -50%) rotateX(360deg); } }
-@keyframes spin-y { from { transform: translate(-50%, -50%) rotateY(0deg); } to { transform: translate(-50%, -50%) rotateY(360deg); } }
-@keyframes spin-z { from { transform: translate(-50%, -50%) rotateZ(0deg); } to { transform: translate(-50%, -50%) rotateZ(360deg); } }
-
-/* Gyro Core */
-.gyro-core {
-  position: absolute;
-  top: 50%; left: 50%;
-  width: 80px; height: 80px;
-  transform: translate(-50%, -50%);
-  transform-style: preserve-3d;
-}
-
-.core-layer {
+/* 3개의 교차하는 색상 평면 (L, a, b 축 상징) */
+.axis-plane {
   position: absolute;
   inset: 0;
   border-radius: 50%;
-  background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 1), transparent);
   mix-blend-mode: screen;
-  filter: blur(8px);
-  animation: pulse-core 4s ease-in-out infinite alternate;
+  opacity: 0.7;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
 }
 
-.core-layer:nth-child(1) { background: radial-gradient(circle, #ff0000, transparent 70%); transform: translateZ(10px); }
-.core-layer:nth-child(2) { background: radial-gradient(circle, #00ff00, transparent 70%); transform: translateZ(-10px); }
-.core-layer:nth-child(3) { background: radial-gradient(circle, #0000ff, transparent 70%); transform: rotateY(90deg); }
+/* Plane 1: Lightness (White - Black) */
+.axis-plane:nth-child(1) {
+  background: conic-gradient(from 0deg, #fff, #888, #000, #888, #fff);
+  transform: rotateY(0deg);
+}
 
-@keyframes pulse-core {
-  0% { transform: scale(0.8); opacity: 0.6; }
-  100% { transform: scale(1.1); opacity: 1; box-shadow: 0 0 50px rgba(255, 255, 255, 0.5); }
+/* Plane 2: a-axis (Green - Red) */
+.axis-plane:nth-child(2) {
+  background: linear-gradient(90deg, #00ff00, transparent, #ff0000);
+  transform: rotateY(60deg);
+}
+
+/* Plane 3: b-axis (Blue - Yellow) */
+.axis-plane:nth-child(3) {
+  background: linear-gradient(180deg, #0000ff, transparent, #ffff00);
+  transform: rotateY(-60deg);
+}
+
+/* 중앙의 핵 (Core) */
+.space-core {
+  position: absolute;
+  width: 40px; height: 40px;
+  background: radial-gradient(circle, #fff 20%, transparent 70%);
+  border-radius: 50%;
+  box-shadow: 0 0 30px #fff;
+  z-index: 10;
+}
+
+@keyframes rotate-space {
+  0% { transform: rotateX(20deg) rotateY(0deg); }
+  100% { transform: rotateX(20deg) rotateY(360deg); }
 }
 
 /* =========================================
-   2. CNN: Hyper-Real OLED Macro
+   2. CNN: Digital Feature Scan
    ========================================= */
 .visual-cnn-container {
   width: 100%;
@@ -277,80 +246,69 @@ a {
   position: relative;
   overflow: hidden;
   border-radius: 20px;
-  box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
-  background: #000;
+  background: #080808;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-/* Layer 1: The RGB Grid (Sub-pixels) - Diamond/Pentile Style */
-.oled-grid-layer {
+/* 배경 그리드 (데이터 매트릭스 상징) */
+.cnn-grid {
   position: absolute;
-  inset: 0;
-  background-color: #000;
-  /* 
-     Using larger spacing and distinct "capsule" shapes for R, G, B 
-     to simulate real macro shot of an OLED panel.
-  */
-  background-image:
-    /* Red Capsules */
-    radial-gradient(ellipse 4px 8px at 10px 10px, rgba(255, 50, 50, 0.6) 0, rgba(255, 50, 50, 0.4) 3px, transparent 4px),
-    /* Blue Capsules */
-    radial-gradient(ellipse 4px 8px at 26px 26px, rgba(50, 100, 255, 0.6) 0, rgba(50, 100, 255, 0.4) 3px, transparent 4px),
-    /* Green Capsules (Smaller & More frequent in Pentile) */
-    radial-gradient(circle at 26px 10px, rgba(50, 255, 100, 0.6) 0, rgba(50, 255, 100, 0.4) 2px, transparent 3px),
-    radial-gradient(circle at 10px 26px, rgba(50, 255, 100, 0.6) 0, rgba(50, 255, 100, 0.4) 2px, transparent 3px);
-  
-  background-size: 32px 32px; /* Large pattern for Macro feel */
-  opacity: 0.4;
-  filter: saturate(1.5) contrast(1.2);
+  inset: -50%;
+  background-image: 
+    linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 40px 40px;
+  transform: perspective(500px) rotateX(60deg) translateY(-50px) translateZ(-100px);
+  animation: grid-move 10s linear infinite;
 }
 
-/* Layer 2: The Mask (Focus Area) - Lit Pixels */
-.oled-mask-layer {
+@keyframes grid-move {
+  0% { background-position: 0 0; }
+  100% { background-position: 0 40px; }
+}
+
+/* 스캔하는 커널 (Focus Frame) */
+.cnn-kernel {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  border: 2px solid var(--accent);
+  box-shadow: 0 0 30px rgba(212, 18, 1, 0.4), inset 0 0 20px rgba(212, 18, 1, 0.2);
+  background: rgba(212, 18, 1, 0.05);
+  backdrop-filter: blur(2px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: hover-kernel 4s ease-in-out infinite;
+}
+
+/* 커널 안의 십자선 (Focus Mark) */
+.cnn-kernel::before, .cnn-kernel::after {
+  content: "";
   position: absolute;
-  inset: 0;
-  background-image:
-    /* Lit Red */
-    radial-gradient(ellipse 4px 8px at 10px 10px, rgba(255, 100, 100, 1) 0, rgba(255, 0, 0, 0.8) 3px, transparent 5px),
-    /* Lit Blue */
-    radial-gradient(ellipse 4px 8px at 26px 26px, rgba(100, 150, 255, 1) 0, rgba(0, 50, 255, 0.8) 3px, transparent 5px),
-    /* Lit Green */
-    radial-gradient(circle at 26px 10px, rgba(100, 255, 150, 1) 0, rgba(0, 255, 0, 0.8) 2px, transparent 4px),
-    radial-gradient(circle at 10px 26px, rgba(100, 255, 150, 1) 0, rgba(0, 255, 0, 0.8) 2px, transparent 4px);
-    
-  background-size: 32px 32px;
-  
-  /* Focus vignette */
-  mask-image: radial-gradient(circle at center, rgba(255, 255, 255, 1) 10%, rgba(255, 255, 255, 0) 60%);
-  -webkit-mask-image: radial-gradient(circle at center, rgba(255, 255, 255, 1) 10%, rgba(255, 255, 255, 0) 60%);
-  
-  mix-blend-mode: screen;
-  filter: brightness(2.0) drop-shadow(0 0 2px rgba(255,255,255,0.5));
-  opacity: 1;
+  background: var(--accent);
 }
+.cnn-kernel::before { width: 100%; height: 1px; top: 50%; opacity: 0.5; }
+.cnn-kernel::after { width: 1px; height: 100%; left: 50%; opacity: 0.5; }
 
-/* Layer 3: Bloom & Glow */
-.oled-bloom-layer {
+/* 스캔 빔 효과 */
+.scan-beam {
   position: absolute;
-  top: 50%; left: 50%;
-  transform: translate(-50%, -50%);
-  width: 150px; height: 150px;
-  background: radial-gradient(circle, rgba(255, 255, 255, 0.9) 0%, rgba(212, 18, 1, 0.6) 40%, transparent 80%);
-  filter: blur(20px);
-  mix-blend-mode: screen;
-  animation: oled-pulse 2s infinite ease-in-out;
+  top: 0; left: 0; right: 0; height: 100%;
+  background: linear-gradient(to bottom, transparent, rgba(212, 18, 1, 0.1), transparent);
+  animation: scan-pass 3s ease-in-out infinite;
 }
 
-@keyframes oled-pulse {
-  0%, 100% { opacity: 0.6; transform: translate(-50%, -50%) scale(1); }
-  50% { opacity: 1; transform: translate(-50%, -50%) scale(1.1); }
+@keyframes hover-kernel {
+  0%, 100% { transform: scale(1); box-shadow: 0 0 30px rgba(212, 18, 1, 0.4); }
+  50% { transform: scale(1.05); box-shadow: 0 0 50px rgba(212, 18, 1, 0.6); }
 }
 
-/* Layer 4: Glass Surface Reflection */
-.oled-glass-reflection {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, transparent 40%, rgba(255,255,255,0.02) 100%);
-  pointer-events: none;
+@keyframes scan-pass {
+  0% { transform: translateY(-150%); }
+  100% { transform: translateY(150%); }
 }
 
 /* =========================================
