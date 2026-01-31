@@ -16,23 +16,15 @@
       <div class="container header-inner">
         <a class="logo" href="index.html" data-i18n="site_name">Bake</a>
         <nav class="site-nav" aria-label="Primary">
-          <a href="index.html" data-i18n="nav_home">홈</a>
+          <a href="about.html" data-i18n="nav_brand">브랜드</a>
           <a href="product.html" data-i18n="nav_product">제품</a>
           <a href="tech.html" data-i18n="nav_tech">기술</a>
-          <a href="samples.html" data-i18n="nav_samples">샘플</a>
           <a href="pricing.html" data-i18n="nav_pricing">가격</a>
-          <a href="faq.html" data-i18n="nav_faq">FAQ</a>
-          <a href="contact.html" data-i18n="nav_contact">문의</a>
-          <a href="about.html" data-i18n="nav_about">회사 소개</a>
         </nav>
         <div class="header-actions">
-          <a class="btn-primary" href="contact.html" data-i18n="cta_contact"
-            >문의하기</a
+          <a class="btn-primary" href="contact.html" data-i18n="cta_start"
+            >시작하기</a
           >
-          <div class="lang-toggle" role="group" aria-label="Language">
-            <button type="button" class="lang-button" data-lang="ko">KR</button>
-            <button type="button" class="lang-button" data-lang="en">EN</button>
-          </div>
         </div>
       </div>
     </header>
@@ -40,139 +32,7 @@
     <main class="main">
       <section class="page-hero">
         <div class="container">
-          <p class="eyebrow" data-i18n="samples_eyebrow">샘플</p>
           <h1 data-i18n="samples_heading">샘플</h1>
-          <p class="lead" data-i18n="samples_intro">
-            비포/애프터 샘플을 슬라이더로 비교할 수 있습니다.
-          </p>
-        </div>
-      </section>
-
-      <section class="section">
-        <div class="container">
-          <div class="sample-card">
-            <div class="sample-header">
-              <h2 data-i18n="sample1_title">샘플 01</h2>
-              <p data-i18n="sample1_desc">저조도 장면의 크로마 디테일</p>
-            </div>
-            <div class="compare" data-compare>
-              <div class="compare-viewport">
-                <img
-                  class="compare-image compare-image-after"
-                  src="assets/samples/sample-1-after.svg"
-                  alt="After"
-                  data-i18n-attr="alt:label_after"
-                />
-                <div class="compare-before">
-                  <img
-                    class="compare-image compare-image-before"
-                    src="assets/samples/sample-1-before.svg"
-                    alt="Before"
-                    data-i18n-attr="alt:label_before"
-                  />
-                </div>
-              </div>
-              <input
-                class="compare-range"
-                type="range"
-                min="0"
-                max="100"
-                value="50"
-                data-compare-range
-                aria-label="비포/애프터 비교 슬라이더"
-                data-i18n-attr="aria-label:compare_aria"
-              />
-              <div class="compare-labels">
-                <span data-i18n="label_before">Before</span>
-                <span data-i18n="label_after">After</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="sample-card">
-            <div class="sample-header">
-              <h2 data-i18n="sample2_title">샘플 02</h2>
-              <p data-i18n="sample2_desc">피부 톤과 미세 질감 복원</p>
-            </div>
-            <div class="compare" data-compare>
-              <div class="compare-viewport">
-                <img
-                  class="compare-image compare-image-after"
-                  src="assets/samples/sample-2-after.svg"
-                  alt="After"
-                  data-i18n-attr="alt:label_after"
-                />
-                <div class="compare-before">
-                  <img
-                    class="compare-image compare-image-before"
-                    src="assets/samples/sample-2-before.svg"
-                    alt="Before"
-                    data-i18n-attr="alt:label_before"
-                  />
-                </div>
-              </div>
-              <input
-                class="compare-range"
-                type="range"
-                min="0"
-                max="100"
-                value="50"
-                data-compare-range
-                aria-label="비포/애프터 비교 슬라이더"
-                data-i18n-attr="aria-label:compare_aria"
-              />
-              <div class="compare-labels">
-                <span data-i18n="label_before">Before</span>
-                <span data-i18n="label_after">After</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="sample-card">
-            <div class="sample-header">
-              <h2 data-i18n="sample3_title">샘플 03</h2>
-              <p data-i18n="sample3_desc">하이라이트 계조 복원</p>
-            </div>
-            <div class="compare" data-compare>
-              <div class="compare-viewport">
-                <img
-                  class="compare-image compare-image-after"
-                  src="assets/samples/sample-3-after.svg"
-                  alt="After"
-                  data-i18n-attr="alt:label_after"
-                />
-                <div class="compare-before">
-                  <img
-                    class="compare-image compare-image-before"
-                    src="assets/samples/sample-3-before.svg"
-                    alt="Before"
-                    data-i18n-attr="alt:label_before"
-                  />
-                </div>
-              </div>
-              <input
-                class="compare-range"
-                type="range"
-                min="0"
-                max="100"
-                value="50"
-                data-compare-range
-                aria-label="비포/애프터 비교 슬라이더"
-                data-i18n-attr="aria-label:compare_aria"
-              />
-              <div class="compare-labels">
-                <span data-i18n="label_before">Before</span>
-                <span data-i18n="label_after">After</span>
-              </div>
-            </div>
-          </div>
-
-          <p class="note" data-i18n="samples_more_note">
-            추가 샘플은 문의로 제공드립니다.
-          </p>
-          <a class="btn-primary" href="contact.html" data-i18n="cta_contact"
-            >문의하기</a
-          >
         </div>
       </section>
     </main>

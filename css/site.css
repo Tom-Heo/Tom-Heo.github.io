@@ -161,6 +161,10 @@ a:hover {
   margin: 12px 0 16px;
 }
 
+.hero-title span {
+  display: block;
+}
+
 .eyebrow {
   font-size: 0.85rem;
   letter-spacing: 0.28em;
